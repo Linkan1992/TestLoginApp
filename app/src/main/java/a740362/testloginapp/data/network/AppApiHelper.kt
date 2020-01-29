@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import a740362.testloginapp.data.network.base.BaseRepository
 import a740362.testloginapp.data.network.base.Result
+import a740362.testloginapp.data.persistence.pref.PrefHelper
 import a740362.testloginapp.di.annotation.CoroutineScopeIO
 import a740362.testloginapp.util.Validator
 import kotlinx.coroutines.CoroutineScope
@@ -15,7 +16,7 @@ import javax.inject.Inject
 class AppApiHelper @Inject
 constructor(
   private val apiService: ApiService,
-  @CoroutineScopeIO private val ioCoroutineScope: CoroutineScope
+  @CoroutineScopeIO private val ioCoroutineScope: CoroutineScope, prefHelper: PrefHelper
 ) : BaseRepository(), ApiHelper {
 
 
@@ -45,7 +46,7 @@ constructor(
     }
   }
 
-  override fun getApiLiveData(): LiveData<Result<String>> {
+  override fun getTestLiveData(): LiveData<Result<String>> {
     return testLiveData
   }
 

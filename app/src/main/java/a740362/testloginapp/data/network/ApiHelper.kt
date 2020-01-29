@@ -7,6 +7,6 @@ interface ApiHelper{
 
     fun appLogin(username : String, password : String)
 
-    fun getApiLiveData() : LiveData<Result<String>>;
+    fun getTestLiveData() : LiveData<Result<String>>;
 
 }
