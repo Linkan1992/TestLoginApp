@@ -1,4 +1,9 @@
 <resources>
-  <string name="app_name">TestLoginApp</string>
-  <string name="login">Login</string>
+    <string name="app_name">TestLoginApp</string>
+    <string name="login">Login</string>
+    <string name="login_dummy">Login Dummy</string>
+    <string name="userId">UserID</string>
+    <string name="password">Password</string>
+    <string name="empty"></string>
+    <string name="home">Home</string>
 </resources>

@@ -1,5 +1,6 @@
 package a740362.testloginapp.base
 
+import a740362.testloginapp.R
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
@@ -7,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -27,8 +29,6 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : DaggerAppC
 
     abstract val bindingVariable: Int
 
-    abstract val customTitle: String
-
     abstract val toolbar: Toolbar?
 
     abstract fun initOnCreate(savedInstanceState: Bundle?)
@@ -41,7 +41,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : DaggerAppC
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         initOnCreate(savedInstanceState)
-        title = customTitle
+        title = resources.getString(R.string.empty)
 
     }
 
@@ -55,5 +55,6 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : DaggerAppC
     fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
+
 
 }

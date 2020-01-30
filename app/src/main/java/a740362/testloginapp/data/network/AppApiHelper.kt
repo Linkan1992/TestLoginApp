@@ -6,6 +6,7 @@ import a740362.testloginapp.data.network.base.BaseRepository
 import a740362.testloginapp.data.network.base.Result
 import a740362.testloginapp.data.persistence.pref.PrefHelper
 import a740362.testloginapp.di.annotation.CoroutineScopeIO
+import a740362.testloginapp.util.AppConstants
 import a740362.testloginapp.util.Validator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -15,39 +16,43 @@ import javax.inject.Inject
 
 class AppApiHelper @Inject
 constructor(
-  private val apiService: ApiService,
-  @CoroutineScopeIO private val ioCoroutineScope: CoroutineScope, prefHelper: PrefHelper
+    private val apiService: ApiService,
+    @CoroutineScopeIO private val ioCoroutineScope: CoroutineScope, private val prefHelper: PrefHelper
 ) : BaseRepository(), ApiHelper {
 
 
-  private val testLiveData: MutableLiveData<Result<String>> by lazy { MutableLiveData<Result<String>>() }
+    private val testLiveData: MutableLiveData<Result<String>> by lazy { MutableLiveData<Result<String>>() }
 
-  override fun appLogin(username: String, password: String) {
+    override fun appLogin(username: String, password: String) {
 
-    ioCoroutineScope.launch {
+        ioCoroutineScope.launch {
 
-      testLiveData.postValue(Result.Loading())
+            testLiveData.postValue(Result.Loading())
 
-      try {
+            try {
 
-        /**
-         * simulating network call by making delay
-         */
-        delay(2000)
+                /**
+                 * simulating network call by making delay
+                 */
+                delay(AppConstants.SPLASH_TIME_IN_MILLIS)
 
-        val resp = if (Validator.isValidateCredential(username, password, "Admin", "Admin")) username else "invalid credential"
+                if (Validator.isValidateCredential(username, password, AppConstants.LOGIN_ID, AppConstants.LOGIN_PASS)) {
+                    prefHelper.userId = username
+                    prefHelper.isLoggedIn = true
+                    testLiveData.postValue(Result.Success(AppConstants.SUCCESS))
 
-        testLiveData.postValue(Result.Success(resp))
+                } else testLiveData.postValue(Result.Error(AppConstants.INVALID_CRED))
 
-      } catch (exception: Exception) {
-        testLiveData.postValue(Result.Error(exception.message ?: exception.toString()))
-      }
 
+            } catch (exception: Exception) {
+                testLiveData.postValue(Result.Error(exception.message ?: exception.toString()))
+            }
+
+        }
     }
-  }
 
-  override fun getTestLiveData(): LiveData<Result<String>> {
-    return testLiveData
-  }
+    override fun getTestLiveData(): LiveData<Result<String>> {
+        return testLiveData
+    }
 
 }

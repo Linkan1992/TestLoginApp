@@ -6,6 +6,10 @@ import a740362.testloginapp.ViewModelProviderFactory
 import a740362.testloginapp.base.BaseActivity
 import a740362.testloginapp.data.network.base.Result
 import a740362.testloginapp.databinding.ActivityLoginBinding
+import a740362.testloginapp.ui.activity.main.MainActivity
+import a740362.testloginapp.util.AppConstants
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +17,15 @@ import androidx.lifecycle.observe
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
+
+  companion object {
+
+    fun newIntent(context: Context) {
+      val intent = Intent(context, LoginActivity::class.java)
+      context.startActivity(intent)
+    }
+
+  }
 
   @Inject
   lateinit var viewModelProviderFactory: ViewModelProviderFactory
@@ -35,10 +48,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     get() = BR.viewModel
 
 
-  override val customTitle: String
-    get() = ""
-
-
   override val toolbar: Toolbar?
     get() = null
 
@@ -52,12 +61,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     loginViewModel.mTestLiveData.observe(this){result: Result<String> ->
       when(result){
         is Result.Success ->{
-          showToast(result.data)
+          MainActivity.newIntent(this)
+          finish()
         }
         is Result.Error ->{
           result.message?.let { showToast(it) }
         }
       }
+    }
+
+    loginViewModel.mValidatorLiveData.observe(this){ validationMap : Map<String, Boolean> ->
+
+      showToast(AppConstants.INVALID_CRED)
+
     }
 
   }

@@ -18,6 +18,7 @@
             xmlns:bind="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/lightGrey"
             tools:context=".ui.activity.login.LoginActivity">
 
         <androidx.constraintlayout.widget.Guideline
@@ -57,8 +58,8 @@
                 app:layout_constraintEnd_toEndOf="@id/guidline_end"
                 app:layout_constraintTop_toTopOf="@id/guidline_start_horizontal"
                 app:layout_constraintBottom_toBottomOf="@id/guidline_end_horizontal"
-                app:cardBackgroundColor="@color/lightGrey"
-                app:cardElevation="@dimen/dimes_5dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="@dimen/dimes_16dp"
                 android:foreground="?selectableItemBackground"
                 app:cardCornerRadius="@dimen/dimes_4dp">
 
@@ -66,39 +67,52 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guidline_start_inner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintGuide_percent="0.1"/>
+
+                <TextView
+                        android:id="@+id/login_header"
+                        style="@style/TextStyle.Heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/login_dummy"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/guidline_start_inner"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0"/>
+
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_user_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="@dimen/dimes_50dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        style="@style/TextStyle.EditText"
+                        android:text="@={ viewModel.idInput }"
+                        android:maxLength="16"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.3"
-                        android:isScrollContainer="true"
-                        android:hint="userid"
-                        android:textCursorDrawable="@color/dark_green"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:gravity="center"
-                        android:layout_margin="16dp"
-                        android:background="@drawable/button_round_background"/>
+                        app:layout_constraintTop_toBottomOf="@id/login_header"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.1"
+                        android:hint="@string/userId"
+                        android:inputType="text"/>
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_user_pass"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minHeight="@dimen/dimes_50dp"
+                        style="@style/TextStyle.EditText"
+                        android:text="@={ viewModel.passInput }"
+                        android:maxLength="16"
                         app:layout_constraintTop_toBottomOf="@id/et_user_id"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintVertical_bias="0.03"
-                        android:isScrollContainer="true"
-                        android:hint="password"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:gravity="center"
-                        android:textCursorDrawable="@color/dark_green"
-                        android:layout_margin="16dp"
-                        android:background="@drawable/button_round_background"/>
+                        android:inputType="textPassword"
+                        android:hint="@string/password"/>
 
                 <Button
                         android:id="@+id/btn_login"
@@ -106,6 +120,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/login"
+                        android:onClick="@{ () -> viewModel.simulateLogin() }"
                         app:layout_constraintTop_toBottomOf="@id/et_user_pass"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -124,15 +139,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hello World!"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="gone"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
