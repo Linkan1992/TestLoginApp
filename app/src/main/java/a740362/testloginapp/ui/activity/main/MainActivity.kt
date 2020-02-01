@@ -26,7 +26,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
 
     @Inject
-    lateinit var viewModelProviderFactory: ViewModelProviderFactory
+    lateinit var viewModelProviderFactory : ViewModelProviderFactory
 
 
     private val mainViewModel: MainViewModel by lazy {

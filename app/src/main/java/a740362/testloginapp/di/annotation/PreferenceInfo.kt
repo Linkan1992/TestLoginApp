@@ -1,4 +1,4 @@
-package com.linkan.githubtrendingrepos.di.annotation
+package a740362.testloginapp.di.annotation
 
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy

@@ -1,6 +1,5 @@
-package com.linkan.githubtrendingrepos.di.annotation
+package a740362.testloginapp.di.annotation
 
-import kotlin.annotation.AnnotationTarget;
 
 import javax.inject.Qualifier
 

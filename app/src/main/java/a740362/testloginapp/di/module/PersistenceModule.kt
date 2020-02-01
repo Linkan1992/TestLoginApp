@@ -6,8 +6,8 @@ import android.content.SharedPreferences
 import androidx.annotation.NonNull
 import androidx.room.Room
 import a740362.testloginapp.data.persistence.dao.AppDatabase
-import com.linkan.githubtrendingrepos.di.annotation.DatabaseInfo
-import com.linkan.githubtrendingrepos.di.annotation.PreferenceInfo
+import a740362.testloginapp.di.annotation.DatabaseInfo
+import a740362.testloginapp.di.annotation.PreferenceInfo
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

@@ -1,8 +1,5 @@
 package a740362.testloginapp.di.module
 
-import android.app.Application
-import android.content.Context
-import androidx.annotation.NonNull
 import a740362.testloginapp.data.network.ApiHelper
 import a740362.testloginapp.data.network.AppApiHelper
 import a740362.testloginapp.data.persistence.db.AppDbHelper
@@ -18,12 +15,6 @@ import javax.inject.Singleton
 
 @Module
 class AppModule {
-
-    @Provides
-    @Singleton
-    internal fun provideApplicationContext(@NonNull application: Application): Context {
-        return application;
-    }
 
 
     @Provides

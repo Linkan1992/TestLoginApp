@@ -1,7 +1,4 @@
-package com.linkan.githubtrendingrepos.di.annotation
-
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
+package a740362.testloginapp.di.annotation
 
 import javax.inject.Qualifier
 
